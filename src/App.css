@@ -1,0 +1,64 @@
+/* Global dark theme for Ionic Pokédex */
+:root {
+    --ion-background-color: #0f172a;
+    --ion-background-color-rgb: 15, 23, 42;
+    --ion-text-color: #f1f5f9;
+    --ion-text-color-rgb: 241, 245, 249;
+
+    /* Custom colors */
+    --color-primary: #dc2626;
+    --color-secondary: #fbbf24;
+    --color-accent: #0ea5e9;
+
+    /* Surfaces */
+    --color-surface: #1e293b;
+    --color-surface-2: #334155;
+    --color-border: rgba(148, 163, 184, 0.2);
+
+    /* Text */
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #cbd5e1;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+body {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(7, 14, 28, 0.95));
+    color: var(--color-text-primary);
+}
+
+ion-app {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(7, 14, 28, 0.95));
+}
+
+ion-button {
+    --background: linear-gradient(135deg, #dc2626 0%, #fb7185 100%);
+    --background-hover: linear-gradient(135deg, #991b1b 0%, #f43f5e 100%);
+}
+
+ion-button[color="success"] {
+    --background: linear-gradient(135deg, #16a34a 0%, #4ade80 100%);
+}
+
+ion-button[color="danger"] {
+    --background: linear-gradient(135deg, #dc2626 0%, #fb7185 100%);
+}
+
+ion-button:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-lg);
+}
+
+ion-card {
+    --background: linear-gradient(135deg, rgba(51, 65, 85, 0.6), rgba(30, 41, 59, 0.6));
+    --border-color: rgba(148, 163, 184, 0.2);
+}
+
+ion-searchbar {
+    --background: rgba(51, 65, 85, 0.6);
+    --border-color: rgba(148, 163, 184, 0.2);
+    --color: var(--color-text-primary);
+}

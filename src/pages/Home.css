@@ -1,0 +1,57 @@
+.ion-toolbar-dark {
+    --background: linear-gradient(180deg, rgba(21, 28, 47, 0.98), rgba(17, 24, 39, 0.98)) !important;
+    --border-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+.home-content {
+    --background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(7, 14, 28, 0.95)) !important;
+}
+
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.page-info {
+    color: #fbbf24;
+    font-weight: 600;
+    min-width: 100px;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .pokemon-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pokemon-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .pagination-controls {
+        gap: 8px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pokemon-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
