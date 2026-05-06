@@ -1,14 +1,15 @@
-.detail-content {
+.detail-page .detail-content {
     --background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(7, 14, 28, 0.95)) !important;
+    --padding-top: 16px !important;
 }
 
-.detail-card {
+.detail-page .detail-card {
     text-align: center;
     padding: 20px;
     color: #fff;
 }
 
-.detail-image {
+.detail-page .detail-image {
     width: 300px;
     height: 300px;
     object-fit: contain;
@@ -16,13 +17,13 @@
     display: block;
 }
 
-.detail-card h1 {
+.detail-page .detail-card h1 {
     text-transform: capitalize;
     color: #fbbf24;
     margin-bottom: 20px;
 }
 
-.types {
+.detail-page .types {
     display: flex;
     gap: 10px;
     justify-content: center;
@@ -30,7 +31,7 @@
     margin: 20px 0;
 }
 
-.type-badge {
+.detail-page .type-badge {
     padding: 6px 12px;
     border-radius: 20px;
     font-weight: 600;
@@ -38,27 +39,27 @@
     font-size: 12px;
 }
 
-.stats {
+.detail-page .stats {
     margin-top: 30px;
 }
 
-.stats h2 {
+.detail-page .stats h2 {
     color: #fbbf24;
     text-align: left;
 }
 
-.stat-row {
+.detail-page .stat-row {
     display: flex;
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid rgba(148, 163, 184, 0.1);
 }
 
-.stat-name {
+.detail-page .stat-name {
     text-transform: capitalize;
     font-weight: 600;
 }
 
-.stat-value {
+.detail-page .stat-value {
     color: #fbbf24;
 }

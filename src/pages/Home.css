@@ -1,57 +1,104 @@
-.ion-toolbar-dark {
-    --background: linear-gradient(180deg, rgba(21, 28, 47, 0.98), rgba(17, 24, 39, 0.98)) !important;
-    --border-color: rgba(148, 163, 184, 0.2) !important;
+.home-page .home-content {
+    --background: linear-gradient(180deg, rgba(36, 36, 35, 0.98), rgba(24, 23, 22, 0.98)) !important;
+    --padding-top: 0 !important;
+    --padding-bottom: 16px !important;
 }
 
-.home-content {
-    --background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(7, 14, 28, 0.95)) !important;
+.home-page .home-search-wrap {
+    position: relative;
+    padding: 16px 16px 0;
+    background: transparent;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(200, 159, 156, 0.16);
 }
 
-.pokemon-grid {
+.home-page .search-bar {
+    --background: rgba(58, 56, 55, 0.95);
+    --border-color: rgba(200, 159, 156, 0.16);
+    --color: #eee2df;
+}
+
+.home-page .pokemon-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
-    padding: 20px;
+    padding: 0 20px 20px;
     margin-bottom: 20px;
+    min-height: auto;
 }
 
-.pagination-controls {
+.home-page .pagination-controls {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     padding: 20px;
     flex-wrap: wrap;
 }
 
-.page-info {
-    color: #fbbf24;
+.home-page .pagination-btn {
+    --background: #805050 !important;
+    --background-hover: #906060 !important;
+    --background-activated: #6f4545 !important;
+    --color: #eee2df !important;
+    --border-radius: 8px !important;
+    --padding-start: 16px !important;
+    --padding-end: 16px !important;
+    --padding-top: 10px !important;
+    --padding-bottom: 10px !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+    transition: opacity 0.2s ease !important;
+}
+
+.home-page .pagination-btn:disabled {
+    --background: #3a3837 !important;
+    --color: rgba(238, 226, 223, 0.45) !important;
+    opacity: 0.5;
+}
+
+.home-page .pagination-btn:not(:disabled):hover {
+    transform: none;
+    box-shadow: none;
+    opacity: 0.92;
+}
+
+.home-page .page-info {
+    color: #c89f9c;
     font-weight: 600;
-    min-width: 100px;
+    min-width: 150px;
     text-align: center;
+    font-size: 14px;
+    letter-spacing: 0.5px;
 }
 
 @media (max-width: 1024px) {
-    .pokemon-grid {
+    .home-page .pokemon-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media (max-width: 768px) {
-    .pokemon-grid {
+    .home-page .pokemon-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 12px;
         padding: 12px;
     }
 
-    .pagination-controls {
+    .home-page .pagination-controls {
         gap: 8px;
         padding: 12px;
     }
 }
 
 @media (max-width: 480px) {
-    .pokemon-grid {
+    .home-page .pokemon-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-page .pagination-btn {
+        --padding-start: 12px !important;
+        --padding-end: 12px !important;
+        font-size: 12px !important;
     }
 }

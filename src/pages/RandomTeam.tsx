@@ -62,7 +62,7 @@ export default function RandomTeam() {
     };
 
     return (
-        <IonPage>
+        <IonPage className="random-team-page">
             <IonHeader>
                 <IonToolbar className="ion-toolbar-dark">
                     <IonBackButton defaultHref="/" />

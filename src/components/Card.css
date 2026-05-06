@@ -1,33 +1,27 @@
-.card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
 .pokemon-card {
     margin: 0 !important;
-    background: linear-gradient(180deg, rgba(51, 65, 85, 0.6), rgba(30, 41, 59, 0.6)) !important;
-    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    background: rgba(58, 56, 55, 0.92) !important;
+    border: 1px solid rgba(200, 159, 156, 0.16) !important;
     border-radius: 12px !important;
-    padding: 12px !important;
-    transition: all 0.3s ease;
+    padding: 14px !important;
+    transition: opacity 0.2s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .pokemon-card:hover {
-    transform: translateY(-6px);
-    background: linear-gradient(180deg, rgba(100, 116, 139, 0.8), rgba(51, 65, 85, 0.8)) !important;
-    border-color: rgba(251, 191, 36, 0.35) !important;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    transform: none;
+    border-color: rgba(238, 226, 223, 0.28) !important;
+    opacity: 0.98;
 }
 
 .card-image {
-    width: 110px;
-    height: 110px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    transition: none;
 }
 
 .card-content {
@@ -37,9 +31,10 @@
 
 .card-title {
     text-transform: capitalize;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     text-align: center;
-    color: #fff;
+    color: #eee2df;
     margin: 0;
+    letter-spacing: 0.3px;
 }

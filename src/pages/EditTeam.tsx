@@ -73,7 +73,7 @@ export default function EditTeam() {
     }
 
     return (
-        <IonPage>
+        <IonPage className="edit-team-page">
             <IonHeader>
                 <IonToolbar className="ion-toolbar-dark">
                     <IonBackButton defaultHref="/teams" />

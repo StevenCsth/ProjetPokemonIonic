@@ -1,32 +1,33 @@
-.edit-team-content {
+.edit-team-page .edit-team-content {
     --background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(7, 14, 28, 0.95)) !important;
+    --padding-top: 16px !important;
 }
 
-.edit-team-container {
+.edit-team-page .edit-team-container {
     padding: 20px;
     max-width: 600px;
     margin: 0 auto;
 }
 
-.edit-team-container h2 {
+.edit-team-page .edit-team-container h2 {
     color: #fbbf24;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.pokemon-list {
+.edit-team-page .pokemon-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     margin-bottom: 20px;
 }
 
-.pokemon-item {
+.edit-team-page .pokemon-item {
     background: linear-gradient(135deg, rgba(51, 65, 85, 0.6), rgba(30, 41, 59, 0.6)) !important;
     border: 1px solid rgba(148, 163, 184, 0.2) !important;
 }
 
-.pokemon-item img {
+.edit-team-page .pokemon-item img {
     width: 100%;
     height: 120px;
     object-fit: contain;

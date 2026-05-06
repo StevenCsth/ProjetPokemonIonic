@@ -1,12 +1,8 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonSplitPane, IonMenu, IonContent, setupIonicReact } from '@ionic/react';
+import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import Teams from './pages/Teams';
-import AddTeam from './pages/AddTeam';
-import EditTeam from './pages/EditTeam';
-import Detail from './pages/Detail';
-import RandomTeam from './pages/RandomTeam';
 import NavBar from './components/NavBar';
 
 /* Core CSS required for Ionic components to work properly */
@@ -41,21 +37,6 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/teams">
           <Teams />
-        </Route>
-        <Route exact path="/teams/add">
-          <AddTeam />
-        </Route>
-        <Route exact path="/teams/edit/:teamId">
-          <EditTeam />
-        </Route>
-        <Route exact path="/detail/:name">
-          <Detail />
-        </Route>
-        <Route exact path="/random-team">
-          <RandomTeam />
-        </Route>
-        <Route exact path="/home">
-          <Home />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

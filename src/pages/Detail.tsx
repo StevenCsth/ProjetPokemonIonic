@@ -35,7 +35,7 @@ export default function Detail() {
     }
 
     return (
-        <IonPage>
+        <IonPage className="detail-page">
             <IonHeader>
                 <IonToolbar className="ion-toolbar-dark">
                     <IonBackButton defaultHref="/" />

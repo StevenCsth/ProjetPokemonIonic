@@ -1,12 +1,8 @@
 import {
     IonIcon,
     IonRouterLink,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonNav,
 } from "@ionic/react";
-import { home, list, add, shuffle } from "ionicons/icons";
+import { home, list } from "ionicons/icons";
 import { useLocation } from "react-router-dom";
 import "./NavBar.css";
 
@@ -16,11 +12,11 @@ export default function NavBar() {
     const isActive = (path: string) => location.pathname === path;
 
     return (
-        <>
-            <IonHeader className="navbar-header">
-                <IonToolbar className="navbar-toolbar">
-                    <IonTitle className="navbar-title">Pokédex</IonTitle>
-                </IonToolbar>
+        <div className="navbar-shell">
+            <div className="navbar-header">
+                <div className="navbar-toolbar">
+                    <h1 className="navbar-title">Pokédex</h1>
+                </div>
                 <div className="navbar-nav">
                     <IonRouterLink
                         routerLink="/"
@@ -34,24 +30,10 @@ export default function NavBar() {
                         className={`nav-link ${isActive("/teams") ? "active" : ""}`}
                     >
                         <IonIcon icon={list} />
-                        <span>My Teams</span>
-                    </IonRouterLink>
-                    <IonRouterLink
-                        routerLink="/teams/add"
-                        className={`nav-link ${isActive("/teams/add") ? "active" : ""}`}
-                    >
-                        <IonIcon icon={add} />
-                        <span>Create Team</span>
-                    </IonRouterLink>
-                    <IonRouterLink
-                        routerLink="/random-team"
-                        className={`nav-link ${isActive("/random-team") ? "active" : ""}`}
-                    >
-                        <IonIcon icon={shuffle} />
-                        <span>Random Team</span>
+                        <span>Teams</span>
                     </IonRouterLink>
                 </div>
-            </IonHeader>
-        </>
+            </div>
+        </div>
     );
 }

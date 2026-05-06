@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import {
   IonPage,
   IonContent,
-  IonHeader,
-  IonToolbar,
   IonSearchbar,
   IonButton,
 } from "@ionic/react";
@@ -46,9 +44,9 @@ const Home: React.FC = () => {
   );
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar className="ion-toolbar-dark">
+    <IonPage className="home-page">
+      <IonContent className="home-content">
+        <div className="home-search-wrap">
           <IonSearchbar
             value={searchTerm}
             onIonInput={(e) => {
@@ -58,10 +56,8 @@ const Home: React.FC = () => {
             placeholder="Search a Pokémon..."
             className="search-bar"
           />
-        </IonToolbar>
-      </IonHeader>
+        </div>
 
-      <IonContent className="home-content">
         <div className="pokemon-grid">
           {paginatedPokemons.map((poke) => {
             const id = getIdFromUrl(poke.url);
@@ -74,6 +70,7 @@ const Home: React.FC = () => {
           <IonButton
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
+            className="pagination-btn"
           >
             ◀ Prev
           </IonButton>
@@ -83,6 +80,7 @@ const Home: React.FC = () => {
           <IonButton
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
+            className="pagination-btn"
           >
             Next ▶
           </IonButton>

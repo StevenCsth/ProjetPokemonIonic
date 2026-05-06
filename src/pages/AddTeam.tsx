@@ -94,7 +94,7 @@ export default function AddTeam() {
     };
 
     return (
-        <IonPage>
+        <IonPage className="add-team-page">
             <IonHeader>
                 <IonToolbar className="ion-toolbar-dark">
                     <IonBackButton defaultHref="/teams" />

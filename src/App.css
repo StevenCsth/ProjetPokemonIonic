@@ -1,64 +1,88 @@
 /* Global dark theme for Ionic Pokédex */
 :root {
-    --ion-background-color: #0f172a;
-    --ion-background-color-rgb: 15, 23, 42;
-    --ion-text-color: #f1f5f9;
-    --ion-text-color-rgb: 241, 245, 249;
+    --ion-background-color: #242423;
+    --ion-background-color-rgb: 36, 36, 35;
+    --ion-text-color: #eee2df;
+    --ion-text-color-rgb: 238, 226, 223;
 
     /* Custom colors */
-    --color-primary: #dc2626;
-    --color-secondary: #fbbf24;
-    --color-accent: #0ea5e9;
+    --color-primary: #eee2df;
+    --color-secondary: #c89f9c;
+    --color-accent: #805050;
 
     /* Surfaces */
-    --color-surface: #1e293b;
-    --color-surface-2: #334155;
-    --color-border: rgba(148, 163, 184, 0.2);
+    --color-surface: #2e2d2c;
+    --color-surface-2: #3a3837;
+    --color-border: rgba(238, 226, 223, 0.12);
 
     /* Text */
-    --color-text-primary: #f1f5f9;
-    --color-text-secondary: #cbd5e1;
+    --color-text-primary: #eee2df;
+    --color-text-secondary: #c89f9c;
 
     /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 10px -2px rgba(0, 0, 0, 0.16);
+    --shadow-lg: 0 10px 20px -4px rgba(0, 0, 0, 0.22);
 }
 
 body {
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(7, 14, 28, 0.95));
+    background: linear-gradient(180deg, rgba(36, 36, 35, 0.98), rgba(24, 23, 22, 0.98));
     color: var(--color-text-primary);
 }
 
 ion-app {
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(7, 14, 28, 0.95));
+    background: linear-gradient(180deg, rgba(36, 36, 35, 0.98), rgba(24, 23, 22, 0.98));
+}
+
+/* Reserve space for fixed navbar */
+ion-router-outlet {
+    margin-top: 110px;
+}
+
+.app-shell {
+    min-height: 100vh;
+}
+
+.app-main {
+    /* Padding handled by individual page IonContent padding-top */
 }
 
 ion-button {
-    --background: linear-gradient(135deg, #dc2626 0%, #fb7185 100%);
-    --background-hover: linear-gradient(135deg, #991b1b 0%, #f43f5e 100%);
+    --background: #eee2df;
+    --background-hover: #f5efec;
+    --background-activated: #d8ceca;
+    --color: #242423;
+    --border-radius: 10px;
+    --box-shadow: none;
 }
 
 ion-button[color="success"] {
-    --background: linear-gradient(135deg, #16a34a 0%, #4ade80 100%);
+    --background: #eee2df;
+    --background-hover: #f5efec;
+    --background-activated: #d8ceca;
+    --color: #242423;
 }
 
 ion-button[color="danger"] {
-    --background: linear-gradient(135deg, #dc2626 0%, #fb7185 100%);
+    --background: #c89f9c;
+    --background-hover: #d3aeab;
+    --background-activated: #b98e8b;
+    --color: #242423;
 }
 
 ion-button:hover {
-    transform: scale(1.03);
-    box-shadow: var(--shadow-lg);
+    transform: none;
+    box-shadow: none;
+    opacity: 0.95;
 }
 
 ion-card {
-    --background: linear-gradient(135deg, rgba(51, 65, 85, 0.6), rgba(30, 41, 59, 0.6));
-    --border-color: rgba(148, 163, 184, 0.2);
+    --background: rgba(58, 56, 55, 0.92);
+    --border-color: rgba(200, 159, 156, 0.14);
 }
 
 ion-searchbar {
-    --background: rgba(51, 65, 85, 0.6);
-    --border-color: rgba(148, 163, 184, 0.2);
+    --background: rgba(58, 56, 55, 0.95);
+    --border-color: rgba(200, 159, 156, 0.16);
     --color: var(--color-text-primary);
 }
