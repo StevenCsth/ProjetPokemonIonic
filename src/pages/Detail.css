@@ -21,6 +21,41 @@
     display: block;
 }
 
+.detail-page .sprite-carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.detail-page .sprite-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.detail-page .sprite-meta {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+}
+
+.detail-page .sprite-label {
+    font-weight: 800;
+    color: #242423;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.detail-page .sprite-count {
+    margin-top: 2px;
+    color: #805050;
+    font-weight: 700;
+    font-size: 12px;
+}
+
 .detail-page .detail-topbar {
     display: flex;
     justify-content: flex-start;
@@ -134,10 +169,126 @@
     margin-top: 12px;
 }
 
+.detail-page .chips-left {
+    justify-content: flex-start;
+}
+
 .detail-page .chip-static {
     cursor: default;
     pointer-events: none;
     user-select: none;
+}
+
+.detail-page .chip-link {
+    cursor: pointer;
+    pointer-events: auto;
+    user-select: none;
+}
+
+.detail-page .chip-link:hover {
+    opacity: 0.92;
+}
+
+.detail-page .evo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.detail-page .evo-path {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-start;
+}
+
+.detail-page .evo-node {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-page .evo-arrow {
+    color: #805050;
+    font-weight: 800;
+}
+
+.detail-page .empty-tile {
+    text-align: left;
+    color: #805050;
+    font-weight: 600;
+    padding: 8px 0;
+}
+
+.detail-page .poke-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(36, 36, 35, 0.08);
+    background: rgba(251, 247, 244, 0.96);
+    border-radius: 14px;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.detail-page .poke-mini:hover {
+    opacity: 0.92;
+}
+
+.detail-page .poke-mini-img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+.detail-page .poke-mini-name {
+    text-transform: capitalize;
+    font-weight: 800;
+    color: #242423;
+}
+
+.detail-page .forms-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.detail-page .form-card {
+    border: 1px solid rgba(36, 36, 35, 0.08);
+    background: rgba(251, 247, 244, 0.96);
+    border-radius: 16px;
+    padding: 12px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.detail-page .form-card:hover {
+    opacity: 0.92;
+}
+
+.detail-page .form-img {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    margin: 0 auto 8px;
+    display: block;
+}
+
+.detail-page .form-name {
+    text-transform: capitalize;
+    font-weight: 800;
+    color: #242423;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+@media (max-width: 980px) {
+    .detail-page .forms-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 .detail-page audio {

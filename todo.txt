@@ -2,7 +2,6 @@ idée projet pokemon
 mettre les types direct sur les card de la liste de pokémon 
 sur le random team, faire en sorte que les pokés qui sont pick aient des capacité qui font sens avec les poké choisit + leur capacité spécial  
 ajouter des filtres dans la liste : evolution nv 1, sans evo | Par type | Monotype or Multitype
-ajouter les infos de la lignée d'evo et les formes alternative sur la page detail d'un poké
 si on clique sur la page détail d'un pokemon LEGENDAIRE -> on passe le favicon de l'onglet à masterball.png
 faire en sorte de traduire tous via i8n module 
 sur page detail, carousselle pour changer de sprite du pokemen 

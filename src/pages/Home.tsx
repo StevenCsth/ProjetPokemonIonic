@@ -77,7 +77,7 @@ const Home: React.FC = () => {
             disabled={currentPage === 1}
             className="pagination-btn"
           >
-            ◀ Prev
+            ◀
           </IonButton>
           <span className="page-info">
             Page {currentPage} / {totalPages}
@@ -87,7 +87,7 @@ const Home: React.FC = () => {
             disabled={currentPage === totalPages}
             className="pagination-btn"
           >
-            Next ▶
+            ▶
           </IonButton>
         </div>
       </IonContent>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {
     IonPage,
     IonContent,
@@ -7,7 +7,6 @@ import {
     IonChip,
     IonItem,
     IonLabel,
-    IonList,
     IonButton,
     IonSegment,
     IonSegmentButton,
@@ -32,7 +31,15 @@ type PokemonDetail = {
     height: number;
     weight: number;
     base_experience: number | null;
-    sprites: { front_default: string | null };
+    sprites: {
+        front_default: string | null;
+        back_default?: string | null;
+        front_shiny?: string | null;
+        back_shiny?: string | null;
+        other?: {
+            ["official-artwork"]?: { front_default?: string | null };
+        };
+    };
     cries?: { latest?: string; legacy?: string };
     types: Array<{ slot: number; type: NamedAPIResource }>;
     stats: Array<{ base_stat: number; effort: number; stat: NamedAPIResource }>;
@@ -56,7 +63,25 @@ type VersionGroupResponse = {
     generation: NamedAPIResource;
 };
 
-type Tab = "stats" | "moves";
+type PokemonSpeciesResponse = {
+    evolution_chain: { url: string };
+    varieties: Array<{
+        is_default: boolean;
+        pokemon: NamedAPIResource;
+    }>;
+};
+
+type EvolutionChainLink = {
+    species: NamedAPIResource;
+    evolves_to: EvolutionChainLink[];
+};
+
+type EvolutionChainResponse = {
+    chain: EvolutionChainLink;
+};
+
+type BattleTab = "stats" | "moves";
+type SpeciesTab = "evolution" | "forms";
 
 function getReadableTextColor(hexColor: string) {
     const hex = hexColor.replace("#", "");
@@ -66,6 +91,17 @@ function getReadableTextColor(hexColor: string) {
     // Relative luminance (sRGB)
     const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
     return luminance > 0.65 ? "#242423" : "#FFFFFF";
+}
+
+function buildEvolutionPaths(link: EvolutionChainLink): string[][] {
+    if (!link.evolves_to || link.evolves_to.length === 0) return [[link.species.name]];
+    const paths: string[][] = [];
+    for (const next of link.evolves_to) {
+        for (const p of buildEvolutionPaths(next)) {
+            paths.push([link.species.name, ...p]);
+        }
+    }
+    return paths;
 }
 
 type MoveDetail = {
@@ -83,21 +119,61 @@ type MoveDetail = {
     }>;
 };
 
+type PokemonMini = {
+    id: number;
+    name: string;
+    image: string;
+};
+
+type SpriteItem = { label: string; url: string };
+
+function buildSprites(p: PokemonDetail): SpriteItem[] {
+    const candidates: Array<SpriteItem | null> = [
+        p.sprites?.other?.["official-artwork"]?.front_default
+            ? { label: "Official artwork", url: p.sprites.other["official-artwork"].front_default }
+            : null,
+        p.sprites?.front_default ? { label: "Front", url: p.sprites.front_default } : null,
+        p.sprites?.back_default ? { label: "Back", url: p.sprites.back_default } : null,
+        p.sprites?.front_shiny ? { label: "Front shiny", url: p.sprites.front_shiny } : null,
+        p.sprites?.back_shiny ? { label: "Back shiny", url: p.sprites.back_shiny } : null,
+    ];
+
+    const uniq = new Set<string>();
+    const sprites: SpriteItem[] = [];
+    for (const c of candidates) {
+        if (!c?.url) continue;
+        if (uniq.has(c.url)) continue;
+        uniq.add(c.url);
+        sprites.push(c);
+    }
+    return sprites;
+}
+
 export default function Detail() {
     const { name } = useParams<{ name: string }>();
+    const history = useHistory();
     const [pokemon, setPokemon] = useState<PokemonDetail | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [tab, setTab] = useState<Tab>("stats");
+    const [battleTab, setBattleTab] = useState<BattleTab>("stats");
+    const [speciesTab, setSpeciesTab] = useState<SpeciesTab>("evolution");
     const [moveSearch, setMoveSearch] = useState("");
     const [versionGroupToGen, setVersionGroupToGen] = useState<Record<string, string>>({});
     const [openMove, setOpenMove] = useState<string | null>(null);
     const [moveDetails, setMoveDetails] = useState<Record<string, MoveDetail>>({});
     const [moveLoading, setMoveLoading] = useState<Record<string, boolean>>({});
+    const [evolutionPaths, setEvolutionPaths] = useState<string[][]>([]);
+    const [varieties, setVarieties] = useState<Array<{ name: string; isDefault: boolean }>>([]);
+    const [pokemonMini, setPokemonMini] = useState<Record<string, PokemonMini>>({});
+    const [pokemonMiniLoading, setPokemonMiniLoading] = useState<Record<string, boolean>>({});
+    const [spriteIndex, setSpriteIndex] = useState(0);
 
     useEffect(() => {
         if (name) {
             setPokemon(null);
             setError(null);
+            setEvolutionPaths([]);
+            setVarieties([]);
+            setSpriteIndex(0);
             fetch(`https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(name)}`)
                 .then(async (res) => {
                     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -107,6 +183,39 @@ export default function Detail() {
                 .catch(() => setError("Unable to load this Pokémon."));
         }
     }, [name]);
+
+    useEffect(() => {
+        if (!pokemon) return;
+        let cancelled = false;
+
+        (async () => {
+            try {
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`);
+                if (!res.ok) throw new Error("bad species");
+                const species = (await res.json()) as PokemonSpeciesResponse;
+
+                if (cancelled) return;
+                setVarieties(
+                    (species.varieties ?? [])
+                        .map((v) => ({ name: v.pokemon.name, isDefault: v.is_default }))
+                        .sort((a, b) => Number(b.isDefault) - Number(a.isDefault) || a.name.localeCompare(b.name))
+                );
+
+                if (!species.evolution_chain?.url) return;
+                const evoRes = await fetch(species.evolution_chain.url);
+                if (!evoRes.ok) throw new Error("bad evo chain");
+                const evo = (await evoRes.json()) as EvolutionChainResponse;
+                if (cancelled) return;
+                setEvolutionPaths(buildEvolutionPaths(evo.chain));
+            } catch {
+                // ignore: optional UI
+            }
+        })();
+
+        return () => {
+            cancelled = true;
+        };
+    }, [pokemon]);
 
     useEffect(() => {
         if (!pokemon) return;
@@ -144,6 +253,20 @@ export default function Detail() {
         };
     }, [pokemon]);
 
+    useEffect(() => {
+        if (speciesTab !== "evolution") return;
+        const names = Array.from(new Set(evolutionPaths.flat()));
+        for (const n of names) void ensurePokemonMini(n);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [speciesTab, evolutionPaths]);
+
+    useEffect(() => {
+        if (speciesTab !== "forms") return;
+        const names = varieties.filter((v) => !v.isDefault).map((v) => v.name);
+        for (const n of names) void ensurePokemonMini(n);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [speciesTab, varieties]);
+
     if (error) {
         return (
             <IonPage>
@@ -164,9 +287,10 @@ export default function Detail() {
         );
     }
 
-    const mainImage =
-        pokemon.sprites.front_default ??
-        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+    const sprites = buildSprites(pokemon);
+    const fallbackSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+    const safeIndex = sprites.length === 0 ? 0 : Math.min(spriteIndex, sprites.length - 1);
+    const activeSprite = sprites[safeIndex] ?? { label: "Sprite", url: fallbackSprite };
 
     const normalizedMoveSearch = moveSearch.trim().toLowerCase();
     const filteredMoves = pokemon.moves
@@ -188,6 +312,26 @@ export default function Detail() {
         }
     };
 
+    const ensurePokemonMini = async (pokeName: string) => {
+        if (pokemonMini[pokeName] || pokemonMiniLoading[pokeName]) return;
+        setPokemonMiniLoading((prev) => ({ ...prev, [pokeName]: true }));
+        try {
+            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(pokeName)}`);
+            if (!res.ok) throw new Error("bad pokemon mini");
+            const data = await res.json();
+            const id = Number(data.id);
+            const image =
+                data?.sprites?.other?.["official-artwork"]?.front_default ??
+                data?.sprites?.front_default ??
+                `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+            setPokemonMini((prev) => ({ ...prev, [pokeName]: { id, name: pokeName, image } }));
+        } catch {
+            // ignore
+        } finally {
+            setPokemonMiniLoading((prev) => ({ ...prev, [pokeName]: false }));
+        }
+    };
+
     return (
         <IonPage className="detail-page">
             <IonContent className="detail-content">
@@ -200,11 +344,47 @@ export default function Detail() {
 
                     <div className="bento-grid">
                         <div className="bento-tile bento-hero">
-                            <img
-                                src={mainImage}
-                                alt={pokemon.name}
-                                className="detail-image"
-                            />
+                            <div className="sprite-carousel">
+                                <img
+                                    src={activeSprite.url}
+                                    alt={`${pokemon.name} sprite`}
+                                    className="detail-image"
+                                />
+                                <div className="sprite-controls">
+                                    <IonButton
+                                        fill="outline"
+                                        size="small"
+                                        disabled={sprites.length <= 1}
+                                        onClick={() =>
+                                            setSpriteIndex((i) =>
+                                                sprites.length === 0 ? 0 : (i - 1 + sprites.length) % sprites.length
+                                            )
+                                        }
+                                    >
+                                        ◀
+                                    </IonButton>
+                                    <div className="sprite-meta">
+                                        <div className="sprite-label">{activeSprite.label}</div>
+                                        {sprites.length > 0 && (
+                                            <div className="sprite-count">
+                                                {safeIndex + 1}/{sprites.length}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <IonButton
+                                        fill="outline"
+                                        size="small"
+                                        disabled={sprites.length <= 1}
+                                        onClick={() =>
+                                            setSpriteIndex((i) =>
+                                                sprites.length === 0 ? 0 : (i + 1) % sprites.length
+                                            )
+                                        }
+                                    >
+                                        ▶
+                                    </IonButton>
+                                </div>
+                            </div>
                             <div className="hero-right">
                                 <h1 className="hero-title">{pokemon.name}</h1>
                                 <div className="types">
@@ -278,7 +458,7 @@ export default function Detail() {
 
                         {(pokemon.cries?.latest || pokemon.cries?.legacy) && (
                             <div className="bento-tile">
-                                <div className="tile-title">Cry</div>
+                                <div className="tile-title">Make it speak !</div>
                                 {pokemon.cries?.latest && (
                                     <audio controls preload="none" src={pokemon.cries.latest} />
                                 )}
@@ -289,10 +469,11 @@ export default function Detail() {
                         )}
 
                         <div className="bento-tile bento-wide">
+                            <div className="tile-title">Battle</div>
                             <div className="detail-tabs">
                                 <IonSegment
-                                    value={tab}
-                                    onIonChange={(e) => setTab(e.detail.value as Tab)}
+                                    value={battleTab}
+                                    onIonChange={(e) => setBattleTab(e.detail.value as BattleTab)}
                                 >
                                     <IonSegmentButton value="stats">
                                         <IonLabel>Stats</IonLabel>
@@ -303,7 +484,7 @@ export default function Detail() {
                                 </IonSegment>
                             </div>
 
-                            {tab === "stats" && (
+                            {battleTab === "stats" && (
                                 <div className="stats">
                                     <div className="tile-title">Stats</div>
                                     {pokemon.stats.map(({ stat, base_stat }) => (
@@ -315,7 +496,7 @@ export default function Detail() {
                                 </div>
                             )}
 
-                            {tab === "moves" && (
+                            {battleTab === "moves" && (
                                 <div className="stats">
                                     <div className="tile-title">Moves</div>
                                     <IonSearchbar
@@ -441,6 +622,95 @@ export default function Detail() {
                                             </IonAccordion>
                                         ))}
                                     </IonAccordionGroup>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="bento-tile bento-wide">
+                            <div className="tile-title">Species</div>
+                            <div className="detail-tabs">
+                                <IonSegment
+                                    value={speciesTab}
+                                    onIonChange={(e) => setSpeciesTab(e.detail.value as SpeciesTab)}
+                                >
+                                    <IonSegmentButton value="evolution">
+                                        <IonLabel>Evolution</IonLabel>
+                                    </IonSegmentButton>
+                                    <IonSegmentButton value="forms">
+                                        <IonLabel>Forms</IonLabel>
+                                    </IonSegmentButton>
+                                </IonSegment>
+                            </div>
+
+                            {speciesTab === "evolution" && (
+                                <div className="stats">
+                                    <div className="tile-title">Evolution line</div>
+                                    {evolutionPaths.length === 0 ? (
+                                        <div className="empty-tile">No evolution data.</div>
+                                    ) : (
+                                        <div className="evo-list">
+                                            {evolutionPaths.map((path, idx) => (
+                                                <div className="evo-path" key={idx}>
+                                                    {path.map((n, i) => {
+                                                        const mini = pokemonMini[n];
+                                                        return (
+                                                            <span key={`${n}-${i}`} className="evo-node">
+                                                                <button
+                                                                    type="button"
+                                                                    className="poke-mini"
+                                                                    onClick={() => history.push(`/pokemon/${n}`)}
+                                                                >
+                                                                    <img
+                                                                        src={mini?.image}
+                                                                        alt={n}
+                                                                        className="poke-mini-img"
+                                                                        loading="lazy"
+                                                                    />
+                                                                    <span className="poke-mini-name">{n}</span>
+                                                                </button>
+                                                                {i < path.length - 1 && (
+                                                                    <span className="evo-arrow">→</span>
+                                                                )}
+                                                            </span>
+                                                        );
+                                                    })}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {speciesTab === "forms" && (
+                                <div className="stats">
+                                    <div className="tile-title">Alternate forms</div>
+                                    {varieties.filter((v) => !v.isDefault).length === 0 ? (
+                                        <div className="empty-tile">No alternate forms.</div>
+                                    ) : (
+                                        <div className="forms-grid">
+                                            {varieties
+                                                .filter((v) => !v.isDefault)
+                                                .map((v) => {
+                                                    const mini = pokemonMini[v.name];
+                                                    return (
+                                                        <button
+                                                            key={v.name}
+                                                            type="button"
+                                                            className="form-card"
+                                                            onClick={() => history.push(`/pokemon/${v.name}`)}
+                                                        >
+                                                            <img
+                                                                src={mini?.image}
+                                                                alt={v.name}
+                                                                className="form-img"
+                                                                loading="lazy"
+                                                            />
+                                                            <div className="form-name">{v.name}</div>
+                                                        </button>
+                                                    );
+                                                })}
+                                        </div>
+                                    )}
                                 </div>
                             )}
                         </div>
