@@ -14,22 +14,12 @@ import {
     IonCardContent,
 } from "@ionic/react";
 import { Pokedex } from "../api/client";
+import { PokemonListItem, SelectedPokemon } from "../types/models";
 import "./AddTeam.css";
-
-type Pokemon = {
-    name: string;
-    url: string;
-};
-
-type SelectedPokemon = {
-    name: string;
-    id: number;
-    image: string;
-};
 
 export default function AddTeam() {
     const history = useHistory();
-    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const [pokemons, setPokemons] = useState<PokemonListItem[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedPokemons, setSelectedPokemons] = useState<SelectedPokemon[]>([]);
     const [teamName, setTeamName] = useState("");
@@ -50,7 +40,7 @@ export default function AddTeam() {
         poke.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const handleSelectPokemon = (poke: Pokemon) => {
+    const handleSelectPokemon = (poke: PokemonListItem) => {
         if (selectedPokemons.length >= 6) {
             alert("Maximum 6 Pokémon per team!");
             return;

@@ -1,7 +1,7 @@
 .pokemon-card {
     margin: 0 !important;
-    background: rgba(58, 56, 55, 0.92) !important;
-    border: 1px solid rgba(200, 159, 156, 0.16) !important;
+    background: rgba(251, 247, 244, 0.96) !important;
+    border: 1px solid rgba(36, 36, 35, 0.08) !important;
     border-radius: 12px !important;
     padding: 14px !important;
     transition: opacity 0.2s ease;
@@ -12,7 +12,7 @@
 
 .pokemon-card:hover {
     transform: none;
-    border-color: rgba(238, 226, 223, 0.28) !important;
+    border-color: rgba(36, 36, 35, 0.18) !important;
     opacity: 0.98;
 }
 
@@ -34,7 +34,7 @@
     font-size: 15px;
     font-weight: 600;
     text-align: center;
-    color: #eee2df;
+    color: #242423;
     margin: 0;
     letter-spacing: 0.3px;
 }

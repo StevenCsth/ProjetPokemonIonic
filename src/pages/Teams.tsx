@@ -10,26 +10,15 @@ import {
     IonModal,
 } from "@ionic/react";
 import { Pokedex } from "../api/client";
+import { Pokemon, PokemonListItem, Team } from "../types/models";
 import "./Teams.css";
-
-type Pokemon = {
-    name: string;
-    id: number;
-    image: string;
-};
-
-type Team = {
-    id: string;
-    name: string;
-    pokemons: Pokemon[];
-};
 
 type View = "list" | "create" | "edit" | "random" | "detail";
 
 export default function Teams() {
     const [teams, setTeams] = useState<Team[]>([]);
     const [currentView, setCurrentView] = useState<View>("list");
-    const [allPokemons, setAllPokemons] = useState<Array<{ name: string; url: string }>>([]);
+    const [allPokemons, setAllPokemons] = useState<PokemonListItem[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedPokemons, setSelectedPokemons] = useState<Pokemon[]>([]);
     const [teamName, setTeamName] = useState("");
@@ -60,7 +49,7 @@ export default function Teams() {
         poke.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const handleSelectPokemon = (poke: { name: string; url: string }) => {
+    const handleSelectPokemon = (poke: PokemonListItem) => {
         if (selectedPokemons.length >= 6) {
             alert("Maximum 6 Pokémon per team!");
             return;

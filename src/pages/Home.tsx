@@ -7,17 +7,13 @@ import {
 } from "@ionic/react";
 import { Pokedex } from "../api/client";
 import Card from "../components/Card";
+import { PokemonListItem } from "../types/models";
 import "./Home.css";
-
-type Pokemon = {
-  name: string;
-  url: string;
-};
 
 const PAGE_SIZE = 20;
 
 const Home: React.FC = () => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [pokemons, setPokemons] = useState<PokemonListItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 

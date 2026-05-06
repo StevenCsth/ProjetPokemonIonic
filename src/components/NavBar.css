@@ -7,8 +7,8 @@
 }
 
 .navbar-header {
-    background: linear-gradient(180deg, rgba(36, 36, 35, 0.98), rgba(36, 36, 35, 0.96)) !important;
-    border-bottom: 1px solid rgba(200, 159, 156, 0.16);
+    background: linear-gradient(180deg, rgba(251, 247, 244, 0.98), rgba(243, 236, 231, 0.98)) !important;
+    border-bottom: 1px solid rgba(36, 36, 35, 0.08);
 }
 
 .navbar-toolbar {
@@ -22,7 +22,7 @@
 .navbar-title {
     font-size: 28px !important;
     font-weight: 700 !important;
-    color: #eee2df !important;
+    color: #805050 !important;
     text-align: center !important;
     margin: 0 !important;
 }
@@ -34,7 +34,7 @@
     justify-content: center;
     flex-wrap: nowrap;
     background: transparent;
-    border-top: 1px solid rgba(200, 159, 156, 0.08);
+    border-top: 1px solid rgba(36, 36, 35, 0.06);
     overflow-x: auto;
     scrollbar-width: thin;
 }
@@ -48,7 +48,7 @@
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    color: #c89f9c;
+    color: #805050;
     font-weight: 500;
     font-size: 14px;
     cursor: pointer;
@@ -58,7 +58,7 @@
 }
 
 .nav-link.active {
-    color: #eee2df;
+    color: #242423;
     font-weight: 600;
 }
 

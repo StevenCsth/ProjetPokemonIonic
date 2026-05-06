@@ -1,5 +1,5 @@
 .teams-page .teams-content {
-    --background: linear-gradient(180deg, rgba(36, 36, 35, 0.98), rgba(24, 23, 22, 0.98)) !important;
+    --background: linear-gradient(180deg, rgba(243, 236, 231, 1), rgba(238, 226, 223, 1)) !important;
     --padding-top: 16px !important;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .teams-page .teams-header h1 {
-    color: #eee2df;
+    color: #242423;
     margin: 0;
     text-align: center;
     font-size: 32px;
@@ -73,8 +73,8 @@
 }
 
 .teams-page .team-card {
-    background: rgba(58, 56, 55, 0.92);
-    border: 1px solid rgba(200, 159, 156, 0.14);
+    background: rgba(251, 247, 244, 0.96);
+    border: 1px solid rgba(36, 36, 35, 0.08);
     border-radius: 12px;
     padding: 20px;
     text-align: center;
@@ -89,11 +89,11 @@
 
 .teams-page .team-card h2 {
     margin-top: 0;
-    color: #eee2df;
+    color: #242423;
 }
 
 .teams-page .team-card p {
-    color: #c89f9c;
+    color: #805050;
     margin: 8px 0;
 }
 
@@ -111,13 +111,13 @@
     cursor: pointer;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid rgba(200, 159, 156, 0.18);
+    border: 1px solid rgba(36, 36, 35, 0.08);
     transition: all 0.3s ease;
 }
 
 .teams-page .team-pokemon-mini:hover {
     transform: none;
-    border-color: rgba(238, 226, 223, 0.32);
+    border-color: rgba(36, 36, 35, 0.18);
 }
 
 .teams-page .team-pokemon-mini img {
@@ -139,7 +139,7 @@
 .teams-page .empty-message {
     text-align: center;
     padding: 40px 20px;
-    color: #c89f9c;
+    color: #805050;
     font-style: italic;
 }
 
@@ -149,12 +149,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border-bottom: 1px solid rgba(200, 159, 156, 0.16);
+    border-bottom: 1px solid rgba(36, 36, 35, 0.08);
     gap: 12px;
 }
 
 .teams-page .form-header h2 {
-    color: #eee2df;
+    color: #242423;
     margin: 0;
     flex: 1;
 }
@@ -171,20 +171,20 @@
 
 .teams-page .form-section label {
     display: block;
-    color: #c89f9c;
+    color: #805050;
     font-weight: 600;
     margin-bottom: 8px;
 }
 
 .teams-page .form-section h3 {
-    color: #eee2df;
+    color: #242423;
     margin-bottom: 12px;
 }
 
 .teams-page .search-results {
     max-height: 300px;
     overflow-y: auto;
-    border: 1px solid rgba(200, 159, 156, 0.14);
+    border: 1px solid rgba(36, 36, 35, 0.08);
     border-radius: 8px;
     margin-bottom: 12px;
 }
@@ -197,11 +197,11 @@
     border-bottom: 1px solid rgba(148, 163, 184, 0.08);
     cursor: pointer;
     transition: background 0.2s ease;
-    color: #eee2df;
+    color: #242423;
 }
 
 .teams-page .search-item:hover {
-    background: rgba(200, 159, 156, 0.12);
+    background: rgba(128, 80, 80, 0.08);
 }
 
 .teams-page .pokemon-list {
@@ -211,7 +211,7 @@
 }
 
 .teams-page .selected-card {
-    background: rgba(58, 56, 55, 0.92) !important;
+    background: rgba(251, 247, 244, 0.96) !important;
 }
 
 .teams-page .selected-card img {
@@ -221,7 +221,7 @@
 }
 
 .teams-page .selected-card p {
-    color: #eee2df;
+    color: #242423;
     text-transform: capitalize;
 }
 
@@ -242,7 +242,7 @@
 }
 
 .teams-page .random-container h3 {
-    color: #eee2df;
+    color: #242423;
     margin-bottom: 20px;
 }
 
@@ -257,8 +257,8 @@
 }
 
 .teams-page .team-pokemon {
-    background: rgba(58, 56, 55, 0.92);
-    border: 1px solid rgba(200, 159, 156, 0.14);
+    background: rgba(251, 247, 244, 0.96);
+    border: 1px solid rgba(36, 36, 35, 0.08);
     border-radius: 12px;
     padding: 12px;
     cursor: pointer;
@@ -269,7 +269,7 @@
 
 .teams-page .team-pokemon:hover {
     transform: none;
-    border-color: rgba(238, 226, 223, 0.3);
+    border-color: rgba(36, 36, 35, 0.18);
 }
 
 .teams-page .team-pokemon img {
@@ -283,7 +283,7 @@
     text-transform: capitalize;
     font-weight: 500;
     margin: 0;
-    color: #c89f9c;
+    color: #805050;
 }
 
 .teams-page .random-actions {
@@ -307,17 +307,17 @@
     justify-content: center;
     padding: 40px 20px;
     text-align: center;
-    color: #f1f5f9;
+    color: #242423;
 }
 
 .detail-modal h2 {
-    color: #eee2df;
+    color: #242423;
     text-transform: capitalize;
     margin: 20px 0 8px 0;
 }
 
 .detail-modal p {
-    color: #c89f9c;
+    color: #805050;
     font-size: 14px;
 }
 

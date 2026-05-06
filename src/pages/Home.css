@@ -1,5 +1,5 @@
 .home-page .home-content {
-    --background: linear-gradient(180deg, rgba(36, 36, 35, 0.98), rgba(24, 23, 22, 0.98)) !important;
+    --background: linear-gradient(180deg, rgba(243, 236, 231, 1), rgba(238, 226, 223, 1)) !important;
     --padding-top: 0 !important;
     --padding-bottom: 16px !important;
 }
@@ -9,13 +9,13 @@
     padding: 16px 16px 0;
     background: transparent;
     margin-bottom: 12px;
-    border-bottom: 1px solid rgba(200, 159, 156, 0.16);
+    border-bottom: 1px solid rgba(36, 36, 35, 0.08);
 }
 
 .home-page .search-bar {
-    --background: rgba(58, 56, 55, 0.95);
-    --border-color: rgba(200, 159, 156, 0.16);
-    --color: #eee2df;
+    --background: rgba(251, 247, 244, 0.96);
+    --border-color: rgba(36, 36, 35, 0.08);
+    --color: #242423;
 }
 
 .home-page .pokemon-grid {
@@ -64,7 +64,7 @@
 }
 
 .home-page .page-info {
-    color: #c89f9c;
+    color: #805050;
     font-weight: 600;
     min-width: 150px;
     text-align: center;

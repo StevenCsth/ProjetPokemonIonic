@@ -11,19 +11,8 @@ import {
     IonCard,
     IonCardContent,
 } from "@ionic/react";
+import { Pokemon, Team } from "../types/models";
 import "./EditTeam.css";
-
-type Pokemon = {
-    name: string;
-    id: number;
-    image: string;
-};
-
-type Team = {
-    id: string;
-    name: string;
-    pokemons: Pokemon[];
-};
 
 export default function EditTeam() {
     const { teamId } = useParams<{ teamId: string }>();

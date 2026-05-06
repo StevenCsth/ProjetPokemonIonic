@@ -10,13 +10,8 @@ import {
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { Pokedex } from "../api/client";
+import { Pokemon } from "../types/models";
 import "./RandomTeam.css";
-
-type Pokemon = {
-    name: string;
-    id: number;
-    image: string;
-};
 
 export default function RandomTeam() {
     const history = useHistory();
