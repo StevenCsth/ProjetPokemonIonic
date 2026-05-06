@@ -60,13 +60,13 @@ export default function Teams() {
 
     const handleSelectPokemon = (poke: PokemonListItem) => {
         if (selectedPokemons.length >= 6) {
-            setInfoAlertMessage("Maximum 6 Pokémon par team !");
+            setInfoAlertMessage("Maximum 6 Pokémon per team!");
             setInfoAlertOpen(true);
             return;
         }
 
         if (selectedPokemons.find((p) => p.name === poke.name)) {
-            setInfoAlertMessage("Ce Pokémon est déjà sélectionné !");
+            setInfoAlertMessage("This Pokémon is already selected!");
             setInfoAlertOpen(true);
             return;
         }
@@ -87,13 +87,13 @@ export default function Teams() {
 
     const saveTeam = () => {
         if (!teamName.trim()) {
-            setInfoAlertMessage("Veuillez entrer un nom de team.");
+            setInfoAlertMessage("Please enter a team name.");
             setInfoAlertOpen(true);
             return;
         }
 
         if (selectedPokemons.length === 0) {
-            setInfoAlertMessage("Veuillez sélectionner au moins un Pokémon.");
+            setInfoAlertMessage("Please select at least one Pokémon.");
             setInfoAlertOpen(true);
             return;
         }
@@ -422,11 +422,11 @@ export default function Teams() {
 
                 <IonAlert
                     isOpen={confirmDeleteOpen}
-                    header="Supprimer la team ?"
-                    message="Cette action est définitive."
+                    header="Delete this team?"
+                    message="This action cannot be undone."
                     buttons={[
                         {
-                            text: "Annuler",
+                            text: "Cancel",
                             role: "cancel",
                             handler: () => {
                                 setConfirmDeleteOpen(false);
@@ -434,7 +434,7 @@ export default function Teams() {
                             },
                         },
                         {
-                            text: "Supprimer",
+                            text: "Delete",
                             role: "destructive",
                             handler: () => {
                                 if (pendingDeleteId) {
@@ -455,22 +455,22 @@ export default function Teams() {
 
                 <IonAlert
                     isOpen={randomNamePromptOpen}
-                    header="Nom de la team"
+                    header="Team name"
                     inputs={[
                         {
                             name: "teamName",
                             type: "text",
-                            placeholder: "Ex: Team Kanto",
+                            placeholder: "e.g. Kanto Team",
                         },
                     ]}
                     buttons={[
                         {
-                            text: "Annuler",
+                            text: "Cancel",
                             role: "cancel",
                             handler: () => setRandomNamePromptOpen(false),
                         },
                         {
-                            text: "Enregistrer",
+                            text: "Save",
                             handler: (data) => {
                                 persistRandomTeam(String((data as any)?.teamName ?? ""));
                                 setRandomNamePromptOpen(false);

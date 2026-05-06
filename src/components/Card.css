@@ -3,8 +3,12 @@
     background: rgba(251, 247, 244, 0.96) !important;
     border: 1px solid rgba(36, 36, 35, 0.08) !important;
     border-radius: 12px !important;
-    padding: 14px !important;
     transition: opacity 0.2s ease;
+}
+
+/* When IonCard is clickable (button), the internal "native" part controls layout */
+.pokemon-card::part(native) {
+    padding: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,7 +24,8 @@
     width: 120px;
     height: 120px;
     object-fit: contain;
-    margin-bottom: 10px;
+    display: block;
+    margin: 0 auto 10px;
     transition: none;
 }
 

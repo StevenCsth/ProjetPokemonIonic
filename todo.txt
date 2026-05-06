@@ -5,3 +5,4 @@ ajouter des filtres dans la liste : evolution nv 1, sans evo | Par type | Monoty
 ajouter les infos de la lignée d'evo et les formes alternative sur la page detail d'un poké
 si on clique sur la page détail d'un pokemon LEGENDAIRE -> on passe le favicon de l'onglet à masterball.png
 faire en sorte de traduire tous via i8n module 
+sur page detail, carousselle pour changer de sprite du pokemen 

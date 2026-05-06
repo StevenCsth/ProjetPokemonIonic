@@ -1,26 +1,103 @@
+.detail-page {
+    /* Override global Ionic text color (set to very light in App.css) */
+    --ion-text-color: #242423;
+    --ion-text-color-rgb: 36, 36, 35;
+}
+
 .detail-page .detail-content {
-    --background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(7, 14, 28, 0.95)) !important;
+    --background: linear-gradient(180deg, rgba(243, 236, 231, 1), rgba(238, 226, 223, 1)) !important;
     --padding-top: 16px !important;
 }
 
-.detail-page .detail-card {
-    text-align: center;
-    padding: 20px;
-    color: #fff;
+.detail-page .detail-shell {
+    padding: 16px 16px 24px;
+    color: #242423;
 }
 
 .detail-page .detail-image {
-    width: 300px;
-    height: 300px;
+    width: 220px;
+    height: 220px;
     object-fit: contain;
-    margin: 20px auto;
     display: block;
 }
 
-.detail-page .detail-card h1 {
+.detail-page .detail-topbar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.detail-page .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.detail-page .bento-tile {
+    grid-column: span 6;
+    background: rgba(251, 247, 244, 0.96);
+    border: 1px solid rgba(36, 36, 35, 0.08);
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: var(--shadow-sm);
+}
+
+.detail-page .bento-hero {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 14px;
+    align-items: center;
+}
+
+.detail-page .hero-right {
+    text-align: left;
+}
+
+.detail-page .hero-title {
+    margin: 0 0 8px 0;
+    font-size: 28px;
     text-transform: capitalize;
-    color: #fbbf24;
-    margin-bottom: 20px;
+}
+
+.detail-page .hero-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.detail-page .metric {
+    background: rgba(242, 234, 230, 0.9);
+    border: 1px solid rgba(36, 36, 35, 0.06);
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.detail-page .metric-label {
+    font-size: 12px;
+    color: #805050;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.detail-page .metric-value {
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #242423;
+}
+
+.detail-page .bento-wide {
+    grid-column: span 12;
+}
+
+.detail-page .tile-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #242423;
+    text-align: left;
+    margin-bottom: 10px;
 }
 
 .detail-page .types {
@@ -28,7 +105,7 @@
     gap: 10px;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 20px 0;
+    margin: 6px 0 0;
 }
 
 .detail-page .type-badge {
@@ -37,15 +114,36 @@
     font-weight: 600;
     text-transform: capitalize;
     font-size: 12px;
+    border: 1px solid rgba(36, 36, 35, 0.12);
 }
 
 .detail-page .stats {
-    margin-top: 30px;
+    margin-top: 0;
 }
 
 .detail-page .stats h2 {
-    color: #fbbf24;
+    color: #242423;
     text-align: left;
+}
+
+.detail-page .chips-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.detail-page .chip-static {
+    cursor: default;
+    pointer-events: none;
+    user-select: none;
+}
+
+.detail-page audio {
+    width: 100%;
+    max-width: 420px;
+    margin-top: 12px;
 }
 
 .detail-page .stat-row {
@@ -61,5 +159,117 @@
 }
 
 .detail-page .stat-value {
-    color: #fbbf24;
+    color: #805050;
 }
+
+.detail-page .detail-tabs {
+    margin-bottom: 12px;
+}
+
+.detail-page .moves-meta {
+    margin-top: 10px;
+    color: #805050;
+    font-weight: 600;
+    text-align: left;
+}
+
+.detail-page .move-title {
+    text-transform: capitalize;
+    color: #242423;
+    font-weight: 700;
+}
+
+.detail-page .move-line {
+    border: 1px solid rgba(36, 36, 35, 0.08);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: rgba(251, 247, 244, 0.96);
+    color: #242423;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.detail-page .move-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.detail-page .move-type-label {
+    color: #805050;
+    font-weight: 700;
+}
+
+.detail-page .move-loading {
+    color: #805050;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.detail-page .move-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 14px;
+    padding: 12px;
+    border: 1px solid rgba(36, 36, 35, 0.08);
+    border-radius: 10px;
+    background: rgba(251, 247, 244, 0.96);
+    text-align: left;
+    margin-bottom: 12px;
+}
+
+.detail-page .move-effect {
+    text-align: left;
+    margin-bottom: 14px;
+    color: #242423;
+}
+
+@media (max-width: 520px) {
+    .detail-page .move-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.detail-page ion-accordion ion-item {
+    --background: rgba(251, 247, 244, 0.96);
+    --color: #242423;
+    --border-color: rgba(36, 36, 35, 0.08);
+}
+
+.detail-page ion-segment {
+    --background: rgba(251, 247, 244, 0.96);
+}
+
+.detail-page ion-segment-button {
+    --color: #805050;
+    --color-checked: #242423;
+}
+
+.detail-page ion-list,
+.detail-page ion-item,
+.detail-page ion-label {
+    --color: #242423;
+}
+
+@media (max-width: 980px) {
+    .detail-page .bento-tile {
+        grid-column: span 12;
+    }
+
+    .detail-page .bento-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .detail-page .hero-right {
+        text-align: center;
+    }
+
+    .detail-page .hero-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
