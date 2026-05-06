@@ -8,11 +8,13 @@ import {
 import { Pokedex } from "../api/client";
 import Card from "../components/Card";
 import { PokemonListItem } from "../types/models";
+import { useHistory } from "react-router-dom";
 import "./Home.css";
 
 const PAGE_SIZE = 20;
 
 const Home: React.FC = () => {
+  const history = useHistory();
   const [pokemons, setPokemons] = useState<PokemonListItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -58,7 +60,14 @@ const Home: React.FC = () => {
           {paginatedPokemons.map((poke) => {
             const id = getIdFromUrl(poke.url);
             const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-            return <Card key={poke.name} name={poke.name} image={imageUrl} />;
+            return (
+              <Card
+                key={poke.name}
+                name={poke.name}
+                image={imageUrl}
+                onClick={() => history.push(`/pokemon/${poke.name}`)}
+              />
+            );
           })}
         </div>
 

@@ -22,14 +22,12 @@ export default function NavBar() {
                         routerLink="/"
                         className={`nav-link ${isActive("/") ? "active" : ""}`}
                     >
-                        <IonIcon icon={home} />
                         <span>Home</span>
                     </IonRouterLink>
                     <IonRouterLink
                         routerLink="/teams"
                         className={`nav-link ${isActive("/teams") ? "active" : ""}`}
                     >
-                        <IonIcon icon={list} />
                         <span>Teams</span>
                     </IonRouterLink>
                 </div>

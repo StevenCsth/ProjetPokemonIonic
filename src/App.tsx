@@ -4,6 +4,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import Teams from './pages/Teams';
 import NavBar from './components/NavBar';
+import Detail from './pages/Detail';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -37,6 +38,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/teams">
           <Teams />
+        </Route>
+        <Route exact path="/pokemon/:name">
+          <Detail />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

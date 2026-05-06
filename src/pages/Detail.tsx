@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
     IonPage,
     IonContent,
     IonHeader,
     IonToolbar,
     IonTitle,
-    IonButton,
     IonBackButton,
 } from "@ionic/react";
 import "./Detail.css";
 
 export default function Detail() {
     const { name } = useParams<{ name: string }>();
-    const history = useHistory();
     const [pokemon, setPokemon] = useState<any>(null);
 
     useEffect(() => {
