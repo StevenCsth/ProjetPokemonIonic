@@ -1,3 +1,9 @@
+.home-page {
+    /* Override global Ionic text color (set to very light in App.css) */
+    --ion-text-color: #242423;
+    --ion-text-color-rgb: 36, 36, 35;
+}
+
 .home-page .home-content {
     --background: linear-gradient(180deg, rgba(243, 236, 231, 1), rgba(238, 226, 223, 1)) !important;
     --padding-top: 0 !important;
@@ -25,6 +31,89 @@
     padding: 0 20px 20px;
     margin-bottom: 20px;
     min-height: auto;
+}
+
+.home-page .home-filters {
+    padding: 0 16px 14px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 10px;
+    border-bottom: 1px solid rgba(36, 36, 35, 0.08);
+    margin-bottom: 12px;
+}
+
+.home-page .filter-item {
+    grid-column: span 6;
+    --background: rgba(251, 247, 244, 0.96);
+    --color: #242423;
+    border: 1px solid rgba(36, 36, 35, 0.08);
+    border-radius: 12px;
+}
+
+.home-page .filter-segments {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.home-page .filter-segment {
+    grid-column: span 6;
+    background: rgba(251, 247, 244, 0.96);
+    border: 1px solid rgba(36, 36, 35, 0.08);
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.home-page .filter-segment-label {
+    color: #805050;
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.home-page .filters-actions {
+    grid-column: span 12;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.home-page .filters-loading {
+    padding: 10px 16px;
+    color: #805050;
+    font-weight: 700;
+}
+
+.home-page ion-item,
+.home-page ion-label,
+.home-page ion-select,
+.home-page ion-select::part(text),
+.home-page ion-select::part(placeholder) {
+    --color: #242423;
+    color: #242423;
+}
+
+.home-page ion-select::part(placeholder) {
+    opacity: 0.65;
+}
+
+.home-page ion-segment {
+    --background: rgba(251, 247, 244, 0.96);
+}
+
+.home-page ion-segment-button {
+    --color: #805050;
+    --color-checked: #242423;
+}
+
+@media (max-width: 768px) {
+    .home-page .filter-item {
+        grid-column: span 12;
+    }
+
+    .home-page .filter-segment {
+        grid-column: span 12;
+    }
 }
 
 .home-page .pagination-controls {

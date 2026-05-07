@@ -69,6 +69,7 @@ type PokemonSpeciesResponse = {
         is_default: boolean;
         pokemon: NamedAPIResource;
     }>;
+    is_legendary?: boolean;
 };
 
 type EvolutionChainLink = {
@@ -166,6 +167,7 @@ export default function Detail() {
     const [pokemonMini, setPokemonMini] = useState<Record<string, PokemonMini>>({});
     const [pokemonMiniLoading, setPokemonMiniLoading] = useState<Record<string, boolean>>({});
     const [spriteIndex, setSpriteIndex] = useState(0);
+    const [isLegendary, setIsLegendary] = useState(false);
 
     useEffect(() => {
         if (name) {
@@ -174,6 +176,7 @@ export default function Detail() {
             setEvolutionPaths([]);
             setVarieties([]);
             setSpriteIndex(0);
+            setIsLegendary(false);
             fetch(`https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(name)}`)
                 .then(async (res) => {
                     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -195,6 +198,7 @@ export default function Detail() {
                 const species = (await res.json()) as PokemonSpeciesResponse;
 
                 if (cancelled) return;
+                setIsLegendary(Boolean(species.is_legendary));
                 setVarieties(
                     (species.varieties ?? [])
                         .map((v) => ({ name: v.pokemon.name, isDefault: v.is_default }))
@@ -216,6 +220,22 @@ export default function Detail() {
             cancelled = true;
         };
     }, [pokemon]);
+
+    useEffect(() => {
+        const favicon =
+            document.querySelector<HTMLLinkElement>('#favicon') ??
+            document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+        if (!favicon) return;
+        // Cache-bust to force the browser to actually refresh the icon
+        // (also: file in /public is masterball.webp in this project)
+        const nextHref = isLegendary ? "/masterball.webp" : "/pokeball.png";
+        favicon.setAttribute("href", `${nextHref}?v=${pokemon?.id ?? "0"}`);
+
+        return () => {
+            // When leaving detail page, restore default icon
+            favicon.setAttribute("href", `/pokeball.png?v=${pokemon?.id ?? "0"}`);
+        };
+    }, [isLegendary, pokemon?.id]);
 
     useEffect(() => {
         if (!pokemon) return;
